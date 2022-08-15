@@ -26,10 +26,19 @@ public class UserClient {
         System.out.println(result);
     }
 
-    private static void getUserEntityById(){
+    private static void getUserEntityByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         UserEntity UserEntity = restTemplate.getForObject(MUTABAKAT_PATH_USER_V1 + UUID.fromString(TestString),
+                gokhan.mutabakatclient.model.UserEntity.class, param);
+        System.out.println(UserEntity);
+    }
+
+
+    private static void getUserEntityById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        UserEntity UserEntity = restTemplate.getForObject(MUTABAKAT_PATH_USER_V1 + UUID.fromString(uuid),
                 gokhan.mutabakatclient.model.UserEntity.class, param);
         System.out.println(UserEntity);
     }
@@ -47,13 +56,19 @@ public class UserClient {
         restTemplate.put(TestURL, UserEntity, param);
     }
 
-    private static void deleteUserEntityById() {
+    private static void deleteUserEntityByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_USER_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteUserEntityById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_USER_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getUserEntityFindAll();

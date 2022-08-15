@@ -26,10 +26,18 @@ public class ReconcilClient {
         System.out.println(result);
     }
 
-    private static void getReconcilById(){
+    private static void getReconcilByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         Reconcil Reconcil = restTemplate.getForObject(MUTABAKAT_PATH_RECONCIL_V1 + UUID.fromString(TestString),
+                gokhan.mutabakatclient.model.Reconcil.class, param);
+        System.out.println(Reconcil);
+    }
+
+    private static void getReconcilById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        Reconcil Reconcil = restTemplate.getForObject(MUTABAKAT_PATH_RECONCIL_V1 + UUID.fromString(uuid),
                 gokhan.mutabakatclient.model.Reconcil.class, param);
         System.out.println(Reconcil);
     }
@@ -47,18 +55,24 @@ public class ReconcilClient {
         restTemplate.put(TestURL, Reconcil, param);
     }
 
-    private static void deleteReconcilById() {
+    private static void deleteReconcilByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_RECONCIL_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteReconcilById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_RECONCIL_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getReconcilFindAll();
-//        deleteReconcilById();
-        getReconcilById( );
+//        getReconcilByIdTest();
+//        deleteReconcilByIdTest();
 //        createReconcil();
 //        updateReconcil()
     }

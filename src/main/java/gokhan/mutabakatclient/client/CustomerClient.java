@@ -27,10 +27,18 @@ public class CustomerClient {
         System.out.println(result);
     }
 
-    private static void getCustomerById(){
+    private static void getCustomerByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         Customer customer = restTemplate.getForObject(MUTABAKAT_PATH_CUSTOMER_V1 + UUID.fromString(TestString), 
+                Customer.class, param);
+        System.out.println(customer);
+    }
+
+    private static void getCustomerById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        Customer customer = restTemplate.getForObject(MUTABAKAT_PATH_CUSTOMER_V1 + UUID.fromString(uuid),
                 Customer.class, param);
         System.out.println(customer);
     }
@@ -48,18 +56,24 @@ public class CustomerClient {
         restTemplate.put(TestURL, customer, param);
     }
 
-    private static void deleteCustomerById() {
+    private static void deleteCustomerByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_CUSTOMER_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteCustomerById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_CUSTOMER_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getCustomerFindAll();
-//        deleteCustomerById();
-//        getCustomerById( );
+//        getCustomerByIdTest( );
+//        deleteCustomerByIdTest();
 //        createCustomer();
 //        updateCustomer()
     }

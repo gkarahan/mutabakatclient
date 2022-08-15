@@ -31,10 +31,18 @@ public class SmtpClient {
         System.out.println(result);
     }
 
-    private static void getSmtpById(){
+    private static void getSmtpByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         Smtp Smtp = restTemplate.getForObject(MUTABAKAT_PATH_SMTP_V1 + UUID.fromString(TestString),
+                Smtp.class, param);
+        System.out.println(Smtp);
+    }
+
+    private static void getSmtpById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        Smtp Smtp = restTemplate.getForObject(MUTABAKAT_PATH_SMTP_V1 + UUID.fromString(uuid),
                 Smtp.class, param);
         System.out.println(Smtp);
     }
@@ -52,17 +60,24 @@ public class SmtpClient {
         restTemplate.put(TestURL, Smtp, param);
     }
 
-    private static void deleteSmtpById() {
+    private static void deleteSmtpByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_SMTP_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteSmtpById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_SMTP_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
+
     public static void main( String[] args ) {
 //        getSmtpFindAll();
-//        deleteSmtpById();
-//        getSmtpById( );
+//        getSmtpByIdTest();
+//        deleteSmtpByIdTest();
 //        createSmtp();
 //        updateSmtp()
     }

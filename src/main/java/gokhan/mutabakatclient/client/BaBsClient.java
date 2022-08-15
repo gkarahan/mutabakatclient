@@ -30,10 +30,18 @@ public class BaBsClient {
         System.out.println(result);
     }
 
-    private static void getBaBsById(){
+    private static void getBaBsByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         BaBs baBs = restTemplate.getForObject(MUTABAKAT_PATH_V1 + UUID.fromString(TestString),
+                BaBs.class, param);
+        System.out.println(baBs);
+    }
+
+    private static void getBaBsById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        BaBs baBs = restTemplate.getForObject(MUTABAKAT_PATH_V1 + UUID.fromString(uuid),
                 BaBs.class, param);
         System.out.println(baBs);
     }
@@ -43,25 +51,43 @@ public class BaBsClient {
         System.out.println(createdBaBs.getBody());
     }
 
+    private static void createBaBsTest(){
+        ResponseEntity<BaBs> createdBaBs =  restTemplate.postForEntity(MUTABAKAT_PATH_V1 + "create/", baBs, BaBs.class);
+        System.out.println(createdBaBs.getBody());
+    }
+
+
     private static void updateBaBs(BaBs baBs){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL =MUTABAKAT_PATH_V1 + "update/" + UUID.fromString(TestString);
     }
 
-    private static void deleteBaBsById() {
+    private static void updateBaBsTest(){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(TestString));
+        String TestURL =MUTABAKAT_PATH_V1 + "update/" + UUID.fromString(TestString);
+    }
+
+    private static void deleteBaBsByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteBaBsById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getBaBsFindAll();
-//        getBaBsById();
-//        createBaBs();
-//        updateBaBs();
-//        deleteBaBsById();
+//        getBaBsByIdTest();
+//        deleteBaBsByIdTest();
+//        createBaBsTest();
+//        updateBaBsTest();
     }
 }

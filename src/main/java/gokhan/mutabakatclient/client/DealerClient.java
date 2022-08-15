@@ -26,10 +26,18 @@ public class DealerClient {
         System.out.println(result);
     }
 
-    private static void getDealerById(){
+    private static void getDealerByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         Dealer Dealer = restTemplate.getForObject(MUTABAKAT_PATH_DEALER_V1 + UUID.fromString(TestString),
+                gokhan.mutabakatclient.model.Dealer.class, param);
+        System.out.println(Dealer);
+    }
+
+    private static void getDealerById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        Dealer Dealer = restTemplate.getForObject(MUTABAKAT_PATH_DEALER_V1 + UUID.fromString(uuid),
                 gokhan.mutabakatclient.model.Dealer.class, param);
         System.out.println(Dealer);
     }
@@ -47,18 +55,24 @@ public class DealerClient {
         restTemplate.put(TestURL, Dealer, param);
     }
 
-    private static void deleteDealerById() {
+    private static void deleteDealerByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_DEALER_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteDealerById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_DEALER_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getDealerFindAll();
-//        deleteDealerById();
-//        getDealerById( );
+//        getDealerByIdTest( );
+//        deleteDealerByIdTest();
 //        createDealer();
 //        updateDealer()
     }

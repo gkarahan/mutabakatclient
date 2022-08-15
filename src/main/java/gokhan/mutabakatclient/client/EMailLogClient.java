@@ -26,10 +26,18 @@ public class EMailLogClient {
         System.out.println(result);
     }
 
-    private static void getEMailLogById(){
+    private static void getEMailLogByIdTest(){
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         EMailLog EMailLog = restTemplate.getForObject(MUTABAKAT_PATH_EMAILLOG_V1 + UUID.fromString(TestString),
+                gokhan.mutabakatclient.model.EMailLog.class, param);
+        System.out.println(EMailLog);
+    }
+
+    private static void getEMailLogById(String uuid){
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        EMailLog EMailLog = restTemplate.getForObject(MUTABAKAT_PATH_EMAILLOG_V1 + UUID.fromString(uuid),
                 gokhan.mutabakatclient.model.EMailLog.class, param);
         System.out.println(EMailLog);
     }
@@ -47,18 +55,24 @@ public class EMailLogClient {
         restTemplate.put(TestURL, eMailLog, param);
     }
 
-    private static void deleteEMailLogById() {
+    private static void deleteEMailLogByIdTest() {
         Map<String, UUID> param = new HashMap<>();
         param.put("id", UUID.fromString(TestString));
         String TestURL = MUTABAKAT_PATH_EMAILLOG_V1 + UUID.fromString(TestString);
         restTemplate.delete(TestURL, param);
     }
 
+    private static void deleteEMailLogById(String uuid) {
+        Map<String, UUID> param = new HashMap<>();
+        param.put("id", UUID.fromString(uuid));
+        String TestURL = MUTABAKAT_PATH_EMAILLOG_V1 + UUID.fromString(uuid);
+        restTemplate.delete(TestURL, param);
+    }
 
     public static void main( String[] args ) {
 //        getEMailLogFindAll();
-//        deleteEMailLogById();
-//        getEMailLogById();
+//        getEMailLogByIdTest();
+//        deleteEMailLogByIdTest();
 //        createEMailLog();
 //        updateEMailLog()
     }
